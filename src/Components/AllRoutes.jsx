@@ -12,6 +12,7 @@ import APEX from "../Pages/APEX";
 import AboutUs from "../Pages/AboutUs";
 import Products from "../Pages/Products";
 import SingleProductPage from "../Pages/SingleProductPage";
+import SignUp from "../Pages/SignUp";
 import { Routes, Route } from "react-router-dom";
 
 const AllRoutes = () => {
@@ -31,6 +32,7 @@ const AllRoutes = () => {
         <Route path="/logout" element={<Logout />}></Route>
         <Route path="/products" element={<Products />}></Route>
         <Route path="/products/:id" element={<SingleProductPage />}></Route>
+        <Route path="/signup" element={<SignUp />}></Route>
       </Routes>
     </div>
   );
