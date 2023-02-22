@@ -20,8 +20,22 @@ import {
 
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import SearchBar from "./SearchBar";
+import AllRoutes from "./AllRoutes";
+import { Link as RouterLink } from "react-router-dom";
 
-const Links = ["Dashboard", "Projects", "Team"];
+// { path: "/", title: "Home" },
+
+const Links = [
+  { path: "/", title: "Home" },
+  { path: "/support", title: "Support" },
+  { path: "/solution", title: "Solution" },
+  { path: "/services", title: "Services" },
+  { path: "/deals", title: "Deals" },
+  { path: "/aboutus", title: "AboutUs" },
+  { path: "/apex", title: "APEX" },
+  { path: "/findastore", title: "FindAStore" },
+  { path: "/products", title: "Products" },
+];
 
 const NavLink = ({ children }) => (
   <Link
@@ -53,14 +67,16 @@ const Navbar = () => {
             onClick={isOpen ? onClose : onOpen}
           />
           <HStack spacing={8} alignItems={"center"}>
-            <Box>Logo</Box>
+            <Box>Dell</Box>
             <HStack
               as={"nav"}
               spacing={4}
               display={{ base: "none", md: "flex" }}
             >
               {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
+                <RouterLink to={link.path} key={link}>
+                  {link.title}
+                </RouterLink>
               ))}
             </HStack>
           </HStack>
@@ -94,14 +110,14 @@ const Navbar = () => {
           <Box pb={4} display={{ md: "none" }}>
             <Stack as={"nav"} spacing={4}>
               {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
+                <RouterLink to={link.path} key={link}>
+                  {link.title}
+                </RouterLink>
               ))}
             </Stack>
           </Box>
         ) : null}
       </Box>
-
-      <Box p={4}>Main Content Here</Box>
     </div>
   );
 };

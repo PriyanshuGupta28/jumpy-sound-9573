@@ -1,13 +1,13 @@
 import React from "react";
 import Navbar from "../Components/Navbar";
 
-const Cart = () => {
+const Logout = () => {
   return (
     <div>
       <Navbar />
-      <h1>Cart</h1>
+      Logout
     </div>
   );
 };
 
-export default Cart;
+export default Logout;
