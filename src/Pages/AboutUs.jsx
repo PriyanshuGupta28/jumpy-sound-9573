@@ -132,7 +132,7 @@ const AboutUs = () => {
           </Flex>
         </SimpleGrid>
       </Container>
-      <Box p={4}>
+      <Box p={4} w={"70%"} margin={"auto"}>
         <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10}>
           <Feature1
             icon={<Icon as={FcAssistant} w={10} h={10} />}

@@ -14,8 +14,14 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { useToast } from "@chakra-ui/react";
+import { Link as RouterLink } from "react-router-dom";
+
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Login = () => {
+  const { loginWithRedirect } = useAuth0();
+  const toast = useToast();
   return (
     <div>
       <Navbar />
@@ -58,13 +64,23 @@ const Login = () => {
                   <Link color={"blue.400"}>Forgot password?</Link>
                 </Stack>
                 <Button
+                  // onClick={() =>
+                  //   toast({
+                  //     title: "Account Loged in.",
+                  //     description: "We've Loged in your account.",
+                  //     status: "success",
+                  //     duration: 5000,
+                  //     isClosable: true,
+                  //   })
+                  // }
                   bg={"blue.400"}
                   color={"white"}
                   _hover={{
                     bg: "blue.500",
                   }}
+                  onClick={() => loginWithRedirect()}
                 >
-                  Sign in
+                  <RouterLink to="/"> Log in</RouterLink>
                 </Button>
               </Stack>
             </Stack>
