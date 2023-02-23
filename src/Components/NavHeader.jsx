@@ -15,6 +15,7 @@ const NavHeader = () => {
         display={"flex"}
         justifyContent={"space-around"}
         flexDirection={["column", "row"]}
+        backgroundColor={"white"}
       >
         <Box>
           <Button>
