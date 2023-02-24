@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "../Components/Navbar";
 import {
   Flex,
   Box,
@@ -14,17 +13,14 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { useToast } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
 
 import { useAuth0 } from "@auth0/auth0-react";
 
 const Login = () => {
   const { loginWithRedirect } = useAuth0();
-  const toast = useToast();
   return (
-    <div>
-      <Navbar />
+    <Box>
       <Flex
         minH={"100vh"}
         align={"center"}
@@ -87,7 +83,7 @@ const Login = () => {
           </Box>
         </Stack>
       </Flex>
-    </div>
+    </Box>
   );
 };
 

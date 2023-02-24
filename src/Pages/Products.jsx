@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "../Components/Navbar";
-import { Grid, GridItem, Center, Image } from "@chakra-ui/react";
+import { Grid, GridItem, Center, Button, Text, Box } from "@chakra-ui/react";
 import ProductCard from "./ProductCard";
 import axios from "axios";
 import LoadingBar from "./LoadingBar";
@@ -12,19 +11,22 @@ const Products = () => {
 
   const [loading, setLoading] = useState(false);
 
-  const limit = 5;
+  const limit = 20;
 
-  const token = `1e3ce70a0684465064fbbb0acee47fc5ec705d7f9ac34d22ef133f1bc3ff0311774ea90fc60240b5e8e9d43924d573e0d71a66cc74937ce90883454901bd7f3f411dddc26e9ba1226118cb925b08e48c459f971eaf052e719f4e9991af10598ec83f775d9365d294d4b93a28e1d97bd83f078a3e0bfd1993e8f98b93d8dedaa1`;
+  const token = `fd3bd3b75b4898aa0e1871fc8eb084a4ca01863e4f13b244e1ba5e3653d41b4e0e1a144b392e6ae79f8a734d9c5bed296163391ddfb0bdb71b5d94ac8c8d0555f191f69ae545bf6f8281c52f527db87b88d60beb92ac449d3cd5b988a1e66c9a1494d215da5b6c22c5a3b4ff6c5b22ea02e9e2fb544419eba29a6c5a1d2cadb6`;
 
   const getData = () => {
     setLoading(true);
     axios
-      .get(`https://api.device-specs.io/api/laptops?populate=*`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .get(
+        `https://api.device-specs.io/api/laptops?populate=*&pagination[start]=${page}&pagination[limit]=${limit}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {
         setData(res.data.data);
-        console.log(res.data.data);
+        console.log(res);
         setLoading(false);
       })
       .catch((err) => {
@@ -35,7 +37,7 @@ const Products = () => {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [page]);
 
   if (loading) {
     return <LoadingBar />;
@@ -43,7 +45,6 @@ const Products = () => {
 
   return (
     <div>
-      <Navbar />
       <Grid
         w={"80%"}
         gridTemplateColumns={[
@@ -85,6 +86,15 @@ const Products = () => {
           );
         })}
       </Grid>
+      <Box padding={"2rem"} margin={"auto"}>
+        <Center>
+          <Button isDisabled={page === 1} onClick={() => setPage(page - 1)}>
+            Prev
+          </Button>
+          <Text>{page}</Text>
+          <Button onClick={() => setPage(page + 1)}>Next</Button>
+        </Center>
+      </Box>
     </div>
   );
 };

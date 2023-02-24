@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "../Components/Navbar";
 import {
   Flex,
   Box,
@@ -24,8 +23,7 @@ import { Link as RouterLink } from "react-router-dom";
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   return (
-    <div>
-      <Navbar />
+    <Box>
       <Flex
         minH={"100vh"}
         align={"center"}
@@ -107,7 +105,7 @@ const SignUp = () => {
           </Box>
         </Stack>
       </Flex>
-    </div>
+    </Box>
   );
 };
 

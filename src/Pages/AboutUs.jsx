@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "../Components/Navbar";
 import {
   Container,
   SimpleGrid,
@@ -63,7 +62,6 @@ const Feature1 = ({ title, text, icon }) => {
 const AboutUs = () => {
   return (
     <div>
-      <Navbar />{" "}
       <Container maxW={"5xl"} py={12}>
         <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
           <Stack spacing={4}>
