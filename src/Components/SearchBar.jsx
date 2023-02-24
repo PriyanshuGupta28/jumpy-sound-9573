@@ -35,7 +35,7 @@ const SearchBar = () => {
   }
 
   return (
-    <div>
+    <Box>
       <Flex
         justifyContent={"space-between"}
         margin={"auto"}
@@ -49,21 +49,19 @@ const SearchBar = () => {
           flexDirection={["column", "column", "row", "row", "row", "row"]}
           alignItems={"center"}
         >
-          <Box>
-            <Button>
-              <RouterLink to="/">
-                <Image
-                  src="https://upload.wikimedia.org/wikipedia/commons/6/67/Dell_logo_2021.svg"
-                  w="10rem"
-                />
-              </RouterLink>
-            </Button>
+          <Box margin={"auto"}>
+            <RouterLink to="/">
+              <Image
+                src="https://upload.wikimedia.org/wikipedia/commons/6/67/Dell_logo_2021.svg"
+                w="10rem"
+              />
+            </RouterLink>
           </Box>
           <Box display={"flex"} marginLeft={"20"}>
             <Input
               placeholder="Search Dell"
               size="sm"
-              width={["10rem", "15rem", "25rem", "35rem", "35rem", "35rem"]}
+              width={["15rem", "20rem", "25rem", "35rem", "35rem", "35rem"]}
               border={"1px solid Grey"}
             />
             <Button paddingBottom={"2"}>
@@ -99,7 +97,7 @@ const SearchBar = () => {
           </ButtonGroup>
         </Box>
       </Flex>
-    </div>
+    </Box>
   );
 };
 

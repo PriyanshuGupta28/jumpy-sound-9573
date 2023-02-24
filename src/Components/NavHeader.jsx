@@ -10,7 +10,7 @@ import { ImHeadphones } from "react-icons/im";
 
 const NavHeader = () => {
   return (
-    <div>
+    <Box>
       <Heading
         display={"flex"}
         justifyContent={"space-around"}
@@ -54,7 +54,7 @@ const NavHeader = () => {
           <Text fontSize="lg">Accessories</Text>
         </Box>
       </Heading>
-    </div>
+    </Box>
   );
 };
 

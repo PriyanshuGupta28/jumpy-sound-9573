@@ -28,7 +28,7 @@ const Links = [
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <div>
+    <Box>
       <SearchBar />
       <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
@@ -75,7 +75,7 @@ const Navbar = () => {
           </Box>
         ) : null}
       </Box>
-    </div>
+    </Box>
   );
 };
 
