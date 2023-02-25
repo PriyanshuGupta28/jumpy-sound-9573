@@ -64,7 +64,7 @@ const SearchBar = () => {
               width={["15rem", "20rem", "25rem", "35rem", "35rem", "35rem"]}
               border={"1px solid Grey"}
             />
-            <Button paddingBottom={"2"}>
+            <Button paddingBottom={"2"} backgroundColor={"white"}>
               <BsSearch size={"18px"} />
             </Button>
           </Box>
@@ -73,7 +73,7 @@ const SearchBar = () => {
           <ButtonGroup gap="7" marginRight={"4"} alignItems={"center"}>
             <Text>{isAuthenticated && <p>{user.name} </p>}</Text>
             <RouterLink to={"/cart"}>
-              <Button gap={2}>
+              <Button gap={2} backgroundColor={"white"}>
                 Cart
                 <AiOutlineShoppingCart size={"25px"} />
               </Button>

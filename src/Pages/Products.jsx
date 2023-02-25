@@ -3,6 +3,7 @@ import { Grid, GridItem, Center, Button, Text, Box } from "@chakra-ui/react";
 import ProductCard from "./ProductCard";
 import axios from "axios";
 import LoadingBar from "./LoadingBar";
+// import { useParams } from "react-router-dom";
 
 const Products = () => {
   const [data, setData] = useState([]);
@@ -63,23 +64,21 @@ const Products = () => {
             <GridItem key={e.id}>
               <Center>
                 <ProductCard
-                  id={e.id}
-                  name={e.name}
-                  mpn={e.mpn}
-                  info={e.info}
-                  prices={e.prices[0].price}
+                  id={e?.id}
+                  name={e?.name}
+                  mpn={e?.mpn}
+                  info={e?.info}
+                  prices={e?.prices}
                   // images={e.images[0].url}
-                  images={
-                    "https://devices-api-prd.s3.eu-west-3.amazonaws.com/57413871ce598d16ad7467cfd4a8696b.jpg"
-                  }
-                  cpu_type={e.main.cpu_type}
-                  cpu_implementation={e.main.cpu_implementation}
-                  cpu_number_of_cores={e.main.cpu_number_of_cores}
-                  display_size__inch={e.main.display_size__inch}
-                  memory_ram__gb={e.main.memory_ram__gb}
-                  storage_type={e.main.storage_type}
-                  storage_capacity__gb={e.main.storage_capacity__gb}
-                  design_color_name={e.main.design_color_name}
+                  images={e?.images}
+                  // cpu_type={e.main.cpu_type}
+                  // cpu_implementation={e.main.cpu_implementation}
+                  // cpu_number_of_cores={e.main.cpu_number_of_cores}
+                  // display_size__inch={e.main.display_size__inch}
+                  // memory_ram__gb={e.main.memory_ram__gb}
+                  // storage_type={e.main.storage_type}
+                  // storage_capacity__gb={e.main.storage_capacity__gb}
+                  // design_color_name={e.main.design_color_name}
                 />
               </Center>
             </GridItem>
@@ -87,7 +86,7 @@ const Products = () => {
         })}
       </Grid>
       <Box padding={"2rem"} margin={"auto"}>
-        <Center>
+        <Center gap={"1rem"}>
           <Button isDisabled={page === 1} onClick={() => setPage(page - 1)}>
             Prev
           </Button>

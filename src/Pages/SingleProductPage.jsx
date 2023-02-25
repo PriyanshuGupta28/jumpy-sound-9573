@@ -3,17 +3,8 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
 import { MdLocalShipping } from "react-icons/md";
+import { Box, Text, Image, Button } from "@chakra-ui/react";
 import {
-  Box,
-  Center,
-  Text,
-  Image,
-  GridItem,
-  Grid,
-  Button,
-} from "@chakra-ui/react";
-import {
-  chakra,
   Container,
   Stack,
   Flex,
@@ -22,16 +13,21 @@ import {
   SimpleGrid,
   StackDivider,
   useColorModeValue,
-  VisuallyHidden,
   List,
   ListItem,
 } from "@chakra-ui/react";
 
+import { useToast } from "@chakra-ui/react";
+
 const SingleProductPage = () => {
   const { id } = useParams();
 
+  const toast = useToast();
+
   const [Data, setData] = useState([]);
-  // console.log(id);
+
+  console.log(id);
+
   const token = `fd3bd3b75b4898aa0e1871fc8eb084a4ca01863e4f13b244e1ba5e3653d41b4e0e1a144b392e6ae79f8a734d9c5bed296163391ddfb0bdb71b5d94ac8c8d0555f191f69ae545bf6f8281c52f527db87b88d60beb92ac449d3cd5b988a1e66c9a1494d215da5b6c22c5a3b4ff6c5b22ea02e9e2fb544419eba29a6c5a1d2cadb6`;
   useEffect(() => {
     axios
@@ -39,7 +35,7 @@ const SingleProductPage = () => {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
-        setData(res.data.data);
+        setData(res.data);
         console.log(res.data.data);
       })
       .catch((err) => {
@@ -47,31 +43,38 @@ const SingleProductPage = () => {
       });
   }, [id]);
 
-  const { images, name, data, info, prices } = Data;
+  const { data } = Data;
+
+  const HandleCart = (prod) => {
+    let cartData = JSON.parse(localStorage.getItem("cart")) || [];
+    let alreadyincart = false;
+    for (let i = 0; i < cartData.length; i++) {
+      if (cartData[i].id == prod.id) {
+        alreadyincart = true;
+        break;
+      }
+    }
+    if (alreadyincart) {
+      toast({
+        description: "Product Already in Cart.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    } else {
+      cartData = [...cartData, prod];
+      localStorage.setItem("cart", JSON.stringify(cartData));
+      toast({
+        description: "Product Added to Cart.",
+        status: "success",
+        duration: 6000,
+        isClosable: true,
+      });
+    }
+  };
 
   return (
     <Box>
-      {/* <Grid w={"80%"} gap={20} margin={"auto"}>
-        <GridItem>
-          <Center>
-            <Image src="https://devices-api-prd.s3.eu-west-3.amazonaws.com/57413871ce598d16ad7467cfd4a8696b.jpg" />
-          </Center>
-          <Box>
-            <Text>Title :- {name}</Text>
-            <Text>Info:- {info}</Text>
-            <Text>cpu_type:- {data.cpu.type}</Text>
-            <Text>camera:- {data.camera.type}</Text>
-            <Text>storage:- {data.storage.type}</Text>
-            <Text>Brand:- {data.general.brand}</Text>
-            <Text>Cores:- {data.cpu.number_of_cores}</Text>
-            <Text>storage_type:- {data.storage.type}</Text>
-            <Text>Color:- {data.design.color}</Text>
-            <Text>software:-{data.software.os}</Text>
-            <Text>Price :- {prices[0].currency} {prices[0].price}</Text>
-            <Button variant={"link"}>Buy Now </Button>
-          </Box>
-        </GridItem>
-      </Grid> */}
       <Container maxW={"7xl"}>
         <SimpleGrid
           columns={{ base: 1, lg: 2 }}
@@ -82,9 +85,7 @@ const SingleProductPage = () => {
             <Image
               rounded={"md"}
               alt={"product image"}
-              src={
-                "https://cdn.fstoppers.com/styles/large-16-9/s3/lead/2022/08/img-2022-macbook-air-m2-review-fstoppers-30.jpg"
-              }
+              src={data?.images[0]?.url}
               fit={"cover"}
               align={"center"}
               w={"100%"}
@@ -98,15 +99,15 @@ const SingleProductPage = () => {
                 fontWeight={600}
                 fontSize={{ base: "2xl", sm: "4xl", lg: "5xl" }}
               >
-                {name}
+                {data?.name}
               </Heading>
               <Text
                 color={useColorModeValue("gray.900", "gray.400")}
                 fontWeight={300}
                 fontSize={"2xl"}
               >
-                {/* {[prices][0].currency} */}
-                {prices[0].price}
+                {data?.prices[0]?.currency} :-
+                {data?.prices[0]?.price}
               </Text>
             </Box>
 
@@ -125,9 +126,9 @@ const SingleProductPage = () => {
                   fontSize={"2xl"}
                   fontWeight={"300"}
                 >
-                  Info:- {info}
+                  {data?.info}
                 </Text>
-                <Text fontSize={"lg"}>Info:- {info}</Text>
+                <Text fontSize={"lg"}>{data?.info}</Text>
               </VStack>
               <Box>
                 <Text
@@ -142,16 +143,22 @@ const SingleProductPage = () => {
 
                 <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
                   <List spacing={2}>
-                    {/* <ListItem>cpu_type:- {data.cpu.type}</ListItem> */}
-                    {/* <ListItem>camera:- {data.camera.type}</ListItem> */}
-                    {/* <ListItem>storage:- {data.storage.type}</ListItem> */}
-                    {/* <ListItem>Color:- {data.design.color}</ListItem> */}
+                    <ListItem>Cpu_type:- {data?.data?.cpu?.type}</ListItem>
+                    <ListItem>Camera:- {data?.data?.camera?.type}</ListItem>
+                    <ListItem>
+                      Storage:- {data?.data?.storage?.capacity__gb}
+                    </ListItem>
+                    <ListItem>Color:- {data?.data?.design?.color}</ListItem>
                   </List>
                   <List spacing={2}>
-                    {/* <ListItem>software:-{data.software.os}</ListItem> */}
-                    {/* <ListItem>Brand:- {data.general.brand}</ListItem> */}
-                    {/* <ListItem>Cores:- {data.cpu.number_of_cores}</ListItem> */}
-                    {/* <ListItem>Sstorage_type:- {data.storage.type}</ListItem> */}
+                    <ListItem>Software:-{data?.data?.software?.os}</ListItem>
+                    <ListItem>Brand:- {data?.data?.general?.brand}</ListItem>
+                    <ListItem>
+                      Cores:- {data?.data?.cpu?.number_of_cores}
+                    </ListItem>
+                    <ListItem>
+                      Storage_type:- {data?.data?.storage?.type}
+                    </ListItem>
                   </List>
                 </SimpleGrid>
               </Box>
@@ -169,46 +176,45 @@ const SingleProductPage = () => {
                 <List spacing={2}>
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
-                      Between lugs:
-                    </Text>{" "}
-                    20 mm
+                      Panel:
+                    </Text>
+                    {data?.data?.display?.panel}
                   </ListItem>
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
-                      Bracelet:
+                      Resolution :
                     </Text>{" "}
-                    leather strap
+                    {data?.data?.display?.resolution__pixels}
                   </ListItem>
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
-                      Case:
+                      Ratio :
                     </Text>{" "}
-                    Steel
+                    {data?.data?.display?.ratio}
                   </ListItem>
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
-                      Case diameter:
+                      Hd:
                     </Text>{" "}
-                    42 mm
+                    {data?.data?.display?.hd_type}
                   </ListItem>
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
-                      Dial color:
+                      Battery:
                     </Text>{" "}
-                    Black
+                    {data?.data?.battery?.technology}
                   </ListItem>
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
-                      Crystal:
+                      Memory Gb:
                     </Text>{" "}
-                    Domed, scratch‑resistant sapphire crystal with
-                    anti‑reflective treatment inside
+                    {data?.data?.memory?.ram__gb}
                   </ListItem>
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
-                      Water resistance:
+                      Network (Wifi):
                     </Text>{" "}
-                    5 bar (50 metres / 167 feet){" "}
+                    {data?.data?.network?.wifi_standards}
                   </ListItem>
                 </List>
               </Box>
@@ -227,6 +233,14 @@ const SingleProductPage = () => {
                 transform: "translateY(2px)",
                 boxShadow: "lg",
               }}
+              onClick={() =>
+                HandleCart({
+                  id: id,
+                  name: data?.name,
+                  images: data?.images[0]?.url,
+                  price: data?.prices[0]?.price,
+                })
+              }
             >
               Add to cart
             </Button>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Heading, Text, Button, Box } from "@chakra-ui/react";
+import { Heading, Text, Box, Center } from "@chakra-ui/react";
 import { RiAliensFill } from "react-icons/ri";
 
 import { ImLaptop } from "react-icons/im";
@@ -10,48 +10,87 @@ import { ImHeadphones } from "react-icons/im";
 
 const NavHeader = () => {
   return (
-    <Box>
+    <Box
+    // display={"grid"}
+    // gridAutoColumns={[
+    //   "repaet(2,1fr)",
+    //   "repaet(3,1fr)",
+    //   "repaet(3,1fr)",
+    //   "repaet(3,1fr)",
+    //   "repaet(6,1fr)",
+    //   "repaet(6,1fr)",
+    // ]}
+    >
       <Heading
         display={"flex"}
         justifyContent={"space-around"}
-        flexDirection={["column", "row"]}
         backgroundColor={"white"}
+        width={"60%"}
+        margin={"auto"}
+        gap={"10px"}
+        boxSizing={"inherit"}
+        flex-wrap={"wrap"}
+        flexDirection={["column", "column", "row", "row", "row", "row"]}
       >
         <Box>
-          <Button>
-            <ImLaptop size={"30px"} />
-          </Button>
-          <Text fontSize="lg">Laptops</Text>
+          <Box>
+            <Center>
+              <ImLaptop size={"30px"} />
+            </Center>
+          </Box>
+          <Center>
+            <Text fontSize="lg">Laptops</Text>
+          </Center>
         </Box>
         <Box>
-          <Button>
-            <SlScreenDesktop size={"30px"} />
-          </Button>
-          <Text fontSize="lg">Desktops</Text>
+          <Box>
+            <Center>
+              <SlScreenDesktop size={"30px"} />
+            </Center>
+          </Box>
+          <Center>
+            <Text fontSize="lg">Desktops</Text>
+          </Center>
         </Box>
         <Box>
-          <Button>
-            <RiAliensFill size={"30px"} />
-          </Button>
-          <Text fontSize="lg">Alienware</Text>
+          <Box>
+            <Center>
+              <RiAliensFill size={"30px"} />
+            </Center>
+          </Box>
+          <Center>
+            <Text fontSize="lg">Alienware</Text>
+          </Center>
         </Box>
         <Box>
-          <Button>
-            <ImLaptop size={"30px"} />
-          </Button>
-          <Text fontSize="lg">Vostro</Text>
+          <Box>
+            <Center>
+              <ImLaptop size={"30px"} />
+            </Center>
+          </Box>
+          <Center>
+            <Text fontSize="lg">Vostro</Text>
+          </Center>
         </Box>
         <Box>
-          <Button>
-            <GoDeviceDesktop size={"30px"} />
-          </Button>
-          <Text fontSize="lg">Monitors</Text>
+          <Box>
+            <Center>
+              <GoDeviceDesktop size={"30px"} />
+            </Center>
+          </Box>
+          <Center>
+            <Text fontSize="lg">Monitors</Text>
+          </Center>
         </Box>
         <Box>
-          <Button>
-            <ImHeadphones size={"30px"} />
-          </Button>
-          <Text fontSize="lg">Accessories</Text>
+          <Box>
+            <Center>
+              <ImHeadphones size={"30px"} />
+            </Center>
+          </Box>
+          <Center>
+            <Text fontSize="lg">Accessories</Text>
+          </Center>
         </Box>
       </Heading>
     </Box>
